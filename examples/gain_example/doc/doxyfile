@@ -1,0 +1,17 @@
+PROJECT_NAME           = "Gain_Example"                           
+
+PROJECT_BRIEF          = "Stereo gain manipulation through OSC!"    
+
+OUTPUT_DIRECTORY       = "./"                                                                                      
+INPUT                  = "../"                                          
+
+FILE_PATTERNS          = *.cpp *.h
+
+RECURSIVE              = YES                                                                                                                                 
+FILTER_SOURCE_FILES    = NO
+
+# deactivate when done with major changes
+EXTRACT_PRIVATE	       = YES
+
+HAVE_DOT               = YES
+UML_LOOK               = YES
