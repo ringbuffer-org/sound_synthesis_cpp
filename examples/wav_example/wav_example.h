@@ -11,60 +11,42 @@
 *
 */
 
-#include<iostream>
+
+
+#include <stdio.h>
+#include <string.h>
 #include<stdlib.h>
 #include<unistd.h>
 
 #include<jack/jack.h>
 
-#include"yamlman.h"
 #include"oscman.h"
-
+#include"singlesample.h"
 
 using std::cout;
 using std::endl;
 
 
-
-class GainExample{
+class WavExample{
 
 private:
 
-    ///
-    /// \brief yaml_manager
-    ///        is used for reading the config file
-    YamlMan *yaml_manager;
+    SingleSample *sample;
 
-    ///
-    /// \brief nChannels
-    ///         the number of audio channels @todo (should not be hard-coded)
     int nChannels = 2;
 
-    ///
-    /// \brief client
-    ///         the jack client, obviously
-    jack_client_t   *client;
+    const char **ports;
 
-    ///
-    /// \brief status
-    ///         gets the status from the jack server
+    jack_client_t   *client;
     jack_status_t   status;
 
-
-    ///
-    /// \brief input_port
-    /// the jack input ports
     jack_port_t     **input_port;
-
-    ///
-    /// \brief output_port
-    /// the jack output ports
     jack_port_t     **output_port;
 
     jack_default_audio_sample_t **in, **out;
 
 
-    ///  The OSC manager object
+    /// The OSC manager object
     OscMan *oscman;
 
     ///
@@ -86,10 +68,8 @@ public:
 
     ///
     /// \brief GainExample
-    ///         the constructor
-    /// \param yaml_manager
-    ///
-    GainExample(YamlMan *yaml_manager);
+    ///        Default constructor!
+    WavExample(std::string filename);
 
 };
 

@@ -1,6 +1,6 @@
 PROJECT_NAME           = "Gain_Example"                           
 
-PROJECT_BRIEF          = "Simple gain manipulation through OSC!"    
+PROJECT_BRIEF          = "Stereo gain manipulation through OSC!"    
 
 OUTPUT_DIRECTORY       = "./"                                                                                      
 INPUT                  = "../"                                          
@@ -15,5 +15,3 @@ EXTRACT_PRIVATE	       = YES
 
 HAVE_DOT               = YES
 UML_LOOK               = YES
-
-USE_MOFILE_AS_MAINPAGE = README.md

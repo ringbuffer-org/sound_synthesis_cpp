@@ -11,24 +11,27 @@
 *
 */
 
-#include"gain_example.h"
+#include"wav_example.h"
 
 
 using std::cout;
 using std::endl;
 
 
-GainExample::GainExample(YamlMan *yaml_manager){
-
+WavExample::WavExample(std::string filename){
 
     // creating an OSC manager instance
-    oscman = new OscMan(yaml_manager);
+    oscman = new OscMan(5111);
+
+
+    // hard coded for now
+    sample = new SingleSample(filename);
+
 
     cout << "Starting Jack Client!" << endl;
 
-    this->client = jack_client_open("Gain_Example", JackNullOption, &status, NULL);
+    this->client = jack_client_open("WAV_Example", JackNullOption, &status, NULL);
 
-    // connect the callback function
     jack_set_process_callback(this->client, this->callback_process, this);
 
     // allocate array
@@ -63,6 +66,9 @@ GainExample::GainExample(YamlMan *yaml_manager){
     jack_activate(this->client);
 
 
+
+
+
     jack_connect (client, "system:capture_1", jack_port_name(input_port[0]));
     jack_connect (client, "system:capture_2", jack_port_name(input_port[1]));
 
@@ -77,10 +83,10 @@ GainExample::GainExample(YamlMan *yaml_manager){
 
 
 
-int GainExample::process(jack_nframes_t nframes)
+int WavExample::process (jack_nframes_t nframes)
 {
 
-    double gain = oscman->get_gain();
+   sample->set_rate(oscman->get_speed());
 
     // get buffers
     for ( int i=0 ; i<nChannels; i++)
@@ -91,53 +97,51 @@ int GainExample::process(jack_nframes_t nframes)
 
 
 
-    for(int chanCNT=0; chanCNT<nChannels; chanCNT++)
+
+    for(int sampCNT=0; sampCNT<nframes; sampCNT++)
     {
-        for(int sampCNT=0; sampCNT<nframes; sampCNT++)
+        for(int chanCNT=0; chanCNT<nChannels; chanCNT++)
         {
-            out[chanCNT][sampCNT] = in[chanCNT][sampCNT] * gain;
+            out[chanCNT][sampCNT] = sample->get_sample(sample->get_pos());
         }
+
+        sample->step();
+
     }
+
+
+
+
 
     return 0;
 }
 
 
-int GainExample::callback_process(jack_nframes_t x, void* object)
+int WavExample::callback_process(jack_nframes_t x, void* object)
 {
-    return static_cast<GainExample*>(object)->process(x);
+    return static_cast<WavExample*>(object)->process(x);
 }
 
 
 int main(int argc, char *argv[]){
 
+    std::string filename;
 
-    if (argc < 3)
-        cout << "Need config file to start!" << endl;
-
-    else{
-
-        // process command line arguments
-
-        std::string configfile;
-
-        for (int i = 1; i < argc; i++)
+    for (int i = 1; i < argc; i++)
+    {
+        if (i + 1 != argc)
         {
-            if (i + 1 != argc)
+            if (strcmp(argv[i], "-f") == 0)
             {
-                if (strcmp(argv[i], "-c") == 0)
-                {
-                    configfile = argv[i + 1];
-                    i++;
-                }
+                filename = argv[i + 1];
+                i++;
             }
         }
-
-
-
-        YamlMan *yaml_manager = new YamlMan(configfile);
-
-        /// initial ports from constructor created here.
-        GainExample *t = new GainExample(yaml_manager);
     }
+
+
+
+    /// initial ports from constructor created here.
+    WavExample * t = new WavExample(filename);
+
 }

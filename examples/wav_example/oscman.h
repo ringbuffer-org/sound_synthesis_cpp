@@ -19,8 +19,6 @@
 #include <lo/lo.h>
 #include <lo/lo_cpp.h>
 
-#include "yamlman.h"
-
 #include<iostream>
 #include<vector>
 #include<string>
@@ -38,18 +36,18 @@ private:
 
     lo::ServerThread *st;
 
-    double gain;
+    double speed;
 
 
-    static int gain_callback(const char *path, const char *types, lo_arg ** argv,
+    static int speed_callback(const char *path, const char *types, lo_arg ** argv,
                                int argc, void *data, void *user_data);
 
 
 public:
 
-    OscMan(YamlMan *yaml_manager);
+    OscMan(int p);
 
-    double get_gain();
+    double get_speed();
 
 
 };

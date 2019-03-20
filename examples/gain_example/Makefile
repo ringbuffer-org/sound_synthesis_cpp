@@ -5,18 +5,18 @@ CC      = g++
 CFLAGS  = -I.
 
 # libraries to link
-LDFLAGS = -ljack -llo
+LDFLAGS = -ljack -llo -lyaml-cpp
 
-SRCS = gain_example.cpp oscman.cpp
-DEPS = oscman.h gain_example.h
+SRCS = gain_example.cpp oscman.cpp yamlman.cpp
+DEPS = oscman.h gain_example.h yamlman.h
 
 all: gain_example
 
 %.o: %.c $(DEPS)
 	$(CC) -c -o $@ $< $(CFLAGS) 
 
-gain_example: gain_example.o oscman.o 
-	$(CC) -o gain_example gain_example.o oscman.o $(LDFLAGS)
+gain_example: gain_example.o oscman.o yamlman.o
+	$(CC) -o gain_example gain_example.o oscman.o yamlman.o $(LDFLAGS)
 
 
 clean:
