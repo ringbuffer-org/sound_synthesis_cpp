@@ -33,22 +33,42 @@ private:
 
 
 
-    /// the port to be opened
+    /// the IP port to be opened
     int port;
 
+    ///
     lo::ServerThread *st;
 
+    /// The actual gain value
     double gain;
 
-
+    ///
+    ////// \brief OscMan::gain_callback
+    ////// \param path
+    ////// \param types
+    ////// \param argv
+    ////// \param argc
+    ////// \param data
+    ////// \param user_data
+    ////// \return
     static int gain_callback(const char *path, const char *types, lo_arg ** argv,
                                int argc, void *data, void *user_data);
 
 
 public:
 
+
+    ///
+    /// \brief OscMan::OscMan
+    ///         The constructor
+    /// \param yaml_manager
+    ///
     OscMan(YamlMan *yaml_manager);
 
+    ///
+    /// \brief OscMan::get_gain
+    /// \return the gain value [double]
+    ///
     double get_gain();
 
 

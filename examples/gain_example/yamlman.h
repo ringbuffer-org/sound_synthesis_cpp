@@ -4,7 +4,8 @@
  *
  * \brief Class which parses YAML files for parameters.
  *
- *
+ * YamlMan also keeps the parameter settings and offers
+ * getters for each, individually.
  *
  * \author Henrik von Coler
  *
@@ -33,35 +34,32 @@ class YamlMan
 
 private:
 
-    ///
+
     /// \brief port
     /// The OSC port to be used for receiving messages
-    ///
     int port;
 
-    ///
     /// \brief path
     /// The OSC path used for the parameter
-    ///
     std::string path;
 
 public:
 
+    /// \brief YamlMan
+    ///         Constructor
+    /// \param filepath The path of the config file (*.yml)
     YamlMan(std::string filepath);
 
-
-    ///
     /// \brief return_port
-    /// \return
-    ///
+    /// \return The OSC port to be used
     int return_port();
 
-    ///
     /// \brief return_path
-    /// \return
+    ///         Returns the OSC path used
+    ///         to change the gain of the signal.
     ///
+    /// \return The OSC path.
     string return_path();
-
 
 };
 

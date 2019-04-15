@@ -13,10 +13,7 @@
 #include "oscman.h"
 
 
-///
-/// \brief OscMan::OscMan
-/// \param yaml_manager
-///
+
 OscMan::OscMan(YamlMan *yaml_manager)
 {
 
@@ -47,15 +44,7 @@ OscMan::OscMan(YamlMan *yaml_manager)
 }
 
 
-///
-////// \brief OscMan::gain_callback
-////// \param path
-////// \param types
-////// \param argv
-////// \param argc
-////// \param data
-////// \param user_data
-////// \return
+
 int OscMan::gain_callback(const char *path, const char *types, lo_arg ** argv,
 int argc, void *data, void *user_data )
 {
@@ -70,10 +59,7 @@ int argc, void *data, void *user_data )
 
 }
 
-///
-/// \brief OscMan::get_gain
-/// \return
-///
+
 double OscMan::get_gain()
 {
     return gain;

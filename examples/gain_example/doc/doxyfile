@@ -3,7 +3,7 @@ PROJECT_NAME           = "Gain_Example"
 PROJECT_BRIEF          = "Simple gain manipulation through OSC!"    
 
 OUTPUT_DIRECTORY       = "./"                                                                                      
-INPUT                  = "../"                                          
+INPUT                  = "../" README.md                                       
 
 FILE_PATTERNS          = *.cpp *.h
 
