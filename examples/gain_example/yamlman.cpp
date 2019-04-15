@@ -1,3 +1,15 @@
+/**
+ * \file yamlman.cpp
+ * \class YamlMan
+ *
+ * \author Henrik von Coler
+ *
+ * \version $Revision: 0.5 $
+ *
+ * \date $Date: 2016/08/18$
+ *
+ */
+
 #include "yamlman.h"
 
 YamlMan::YamlMan(std::string filepath)

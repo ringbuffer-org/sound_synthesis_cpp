@@ -1,5 +1,5 @@
 /**
-* \file GainExample.cpp
+* \file gain_example.cpp
 * \class GainExample
 *
 * \brief Simple example, passing the input to the output
@@ -20,6 +20,7 @@ using std::endl;
 
 GainExample::GainExample(YamlMan *yaml_manager){
 
+    /// @todo Add examples for the TODO list.
 
     // creating an OSC manager instance
     oscman = new OscMan(yaml_manager);
@@ -108,36 +109,3 @@ int GainExample::callback_process(jack_nframes_t x, void* object)
     return static_cast<GainExample*>(object)->process(x);
 }
 
-
-int main(int argc, char *argv[]){
-
-
-    if (argc < 3)
-        cout << "Need config file to start!" << endl;
-
-    else{
-
-        // process command line arguments
-
-        std::string configfile;
-
-        for (int i = 1; i < argc; i++)
-        {
-            if (i + 1 != argc)
-            {
-                if (strcmp(argv[i], "-c") == 0)
-                {
-                    configfile = argv[i + 1];
-                    i++;
-                }
-            }
-        }
-
-
-
-        YamlMan *yaml_manager = new YamlMan(configfile);
-
-        /// initial ports from constructor created here.
-        GainExample *t = new GainExample(yaml_manager);
-    }
-}

@@ -1,5 +1,5 @@
 /**
-* \file GainExample.h
+* \file gain_example.h
 * \class GainExample
 *
 * \brief Simple example, passing the input to the output
