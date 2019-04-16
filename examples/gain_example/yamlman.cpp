@@ -19,8 +19,8 @@ YamlMan::YamlMan(std::string filepath)
 
     YAML::Node config = YAML::LoadFile(filepath);
 
+    // read values
     port = config["port"].as<int>();
-
     path = config["path"].as<std::string>();
 
 }

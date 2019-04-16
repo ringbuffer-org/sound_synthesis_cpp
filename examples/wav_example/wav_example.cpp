@@ -82,7 +82,6 @@ WavExample::WavExample(std::string filename){
 }
 
 
-
 int WavExample::process (jack_nframes_t nframes)
 {
 
@@ -122,26 +121,3 @@ int WavExample::callback_process(jack_nframes_t x, void* object)
     return static_cast<WavExample*>(object)->process(x);
 }
 
-
-int main(int argc, char *argv[]){
-
-    std::string filename;
-
-    for (int i = 1; i < argc; i++)
-    {
-        if (i + 1 != argc)
-        {
-            if (strcmp(argv[i], "-f") == 0)
-            {
-                filename = argv[i + 1];
-                i++;
-            }
-        }
-    }
-
-
-
-    /// initial ports from constructor created here.
-    WavExample * t = new WavExample(filename);
-
-}

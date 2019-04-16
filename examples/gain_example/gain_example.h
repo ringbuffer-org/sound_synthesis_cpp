@@ -61,6 +61,10 @@ private:
     /// the jack output ports
     jack_port_t     **output_port;
 
+    ///
+    /// \brief in
+    ///
+    /// \brief out
     jack_default_audio_sample_t **in, **out;
 
 
@@ -76,8 +80,10 @@ private:
 
     ///
     /// \brief callback_process
-    /// \param x
-    /// \param object
+    ///         is used to access the members of this
+    ///         class in the static mode
+    /// \param x number of samples in the buffer
+    /// \param object void pointer
     /// \return
     ///
     static int callback_process(jack_nframes_t x, void* object);

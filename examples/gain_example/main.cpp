@@ -10,7 +10,6 @@
 */
 
 #include"yamlman.h"
-#include"oscman.h"
 #include"gain_example.h"
 
 
@@ -23,14 +22,12 @@ using std::endl;
 
 int main(int argc, char *argv[]){
 
-
     if (argc < 3)
         cout << "Need config file to start!" << endl;
 
     else{
 
         // process command line arguments
-
         std::string configfile;
 
         for (int i = 1; i < argc; i++)
@@ -45,11 +42,8 @@ int main(int argc, char *argv[]){
             }
         }
 
-
-
+        // initialize objects
         YamlMan *yaml_manager = new YamlMan(configfile);
-
-        /// initial ports from constructor created here.
         GainExample *t = new GainExample(yaml_manager);
     }
 }

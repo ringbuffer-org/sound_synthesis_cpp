@@ -20,8 +20,6 @@ using std::endl;
 
 GainExample::GainExample(YamlMan *yaml_manager){
 
-    /// @todo Add examples for the TODO list.
-
     // creating an OSC manager instance
     oscman = new OscMan(yaml_manager);
 
@@ -56,21 +54,16 @@ GainExample::GainExample(YamlMan *yaml_manager){
     out = new jack_default_audio_sample_t*;
     in  = new jack_default_audio_sample_t*;
 
-
-
-
-
-
     jack_activate(this->client);
 
-
+    // connect inputs
     jack_connect (client, "system:capture_1", jack_port_name(input_port[0]));
     jack_connect (client, "system:capture_2", jack_port_name(input_port[1]));
-
+    // connect outputs
     jack_connect (client, jack_port_name(output_port[0]), "system:playback_1");
     jack_connect (client, jack_port_name(output_port[1]), "system:playback_2");
 
-
+    // run forever
     sleep (-1);
 
 
@@ -81,17 +74,19 @@ GainExample::GainExample(YamlMan *yaml_manager){
 int GainExample::process(jack_nframes_t nframes)
 {
 
+    // get the recent gain value from the OSC manager
     double gain = oscman->get_gain();
 
-    // get buffers
+    // get input buffers
     for ( int i=0 ; i<nChannels; i++)
     {
-        out[i] = (jack_default_audio_sample_t *) jack_port_get_buffer(this->output_port[i], jack_get_buffer_size(client));
-        in[i] = (jack_default_audio_sample_t *) jack_port_get_buffer(this->input_port[i], jack_get_buffer_size(client));
+        out[i] = (jack_default_audio_sample_t *)
+                jack_port_get_buffer(this->output_port[i], jack_get_buffer_size(client));
+        in[i]  = (jack_default_audio_sample_t *)
+                jack_port_get_buffer(this->input_port[i], jack_get_buffer_size(client));
     }
 
-
-
+    // write all input samples to output
     for(int chanCNT=0; chanCNT<nChannels; chanCNT++)
     {
         for(int sampCNT=0; sampCNT<nframes; sampCNT++)

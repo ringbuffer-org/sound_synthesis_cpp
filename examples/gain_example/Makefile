@@ -7,6 +7,7 @@ CFLAGS  = -I.
 # libraries to link
 LDFLAGS = -ljack -llo -lyaml-cpp
 
+# all sources and dependencies
 SRCS = main.cpp gain_example.cpp oscman.cpp yamlman.cpp
 DEPS = oscman.h gain_example.h yamlman.h
 
@@ -17,7 +18,6 @@ all: gain_example
 
 gain_example: main.o gain_example.o oscman.o yamlman.o
 	$(CC) -o gain_example main.o gain_example.o oscman.o yamlman.o $(LDFLAGS)
-
 
 clean:
 	rm *.o gain_example

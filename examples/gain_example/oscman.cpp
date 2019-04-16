@@ -19,9 +19,7 @@ OscMan::OscMan(YamlMan *yaml_manager)
 
     port = yaml_manager->return_port();
 
-
     cout << "Receiving OSC on port: " << port << std::endl;
-
 
     gain = 1.0;
 
@@ -32,7 +30,6 @@ OscMan::OscMan(YamlMan *yaml_manager)
     catch (int e)
     {
         std::cout << "Possibly a bad port!" << std::endl;
-
     }
 
     // Add the example handler to the server!
@@ -42,7 +39,6 @@ OscMan::OscMan(YamlMan *yaml_manager)
 
     std::cout << "Started OSC Server!" << std::endl;
 }
-
 
 
 int OscMan::gain_callback(const char *path, const char *types, lo_arg ** argv,
