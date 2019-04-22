@@ -1,10 +1,15 @@
 #include "singlesample.h"
 
-SingleSample::SingleSample(std::string filePath)
+SingleSample::SingleSample(std::string filePath, int fs)
 {
+
     rate = 1;
     pos  = 0.0;
+
+    FS = fs;
+
     read_wavefile(filePath);
+
 }
 
 SingleSample::~SingleSample()
@@ -15,14 +20,12 @@ SingleSample::~SingleSample()
 
 double SingleSample::get_rate()
 {
-
     return rate;
 }
 
 void   SingleSample::set_rate(double r)
 {
     rate = r;
-
 }
 
 double SingleSample::get_pos()
@@ -36,29 +39,7 @@ void SingleSample::set_pos(double p)
 
 }
 
-/// loop play
-void SingleSample::get_frame(int n, float* a)
-{
 
-    for(int i=0; i<n; i++)
-    {
-
-        pos = pos+rate;
-
-        // are we within bounds?
-        if((int)pos<L && (int)pos>=0 )
-        {
-            a[i] = get_sample(pos);
-        }
-        else
-        {
-            if ( rate >= 0)
-                pos = 0;
-            else
-                pos = L-1;
-        }
-    }
-}
 
 
 int SingleSample::get_L()
@@ -66,7 +47,7 @@ int SingleSample::get_L()
     return L;
 }
 
-double* SingleSample::get_x()
+double** SingleSample::get_x()
 {
     return x;
 }
@@ -74,7 +55,7 @@ double* SingleSample::get_x()
 
 void SingleSample::set_f(int in)
 {
-    f =  in;
+    F =  in;
 }
 
 void SingleSample::set_sr(int in)
@@ -93,17 +74,20 @@ void SingleSample::set_nChannels(int in)
     nChannels =  in;
 }
 
+int SingleSample::get_nChannels()
+{
+    return nChannels;
+}
+
 void SingleSample::initialize()
 {
-    x = new double[L*sizeof(double)];
-}
-
-double SingleSample::get_sample(int pos)
-{
-    /// Return sample at integer position only.s
-    return x[pos];
 
 }
+
+//double SingleSample::get_sample(int chan, int pos)
+//{
+//     return x[chan][pos];
+//}
 
 int SingleSample::getFS()
 {
@@ -111,13 +95,15 @@ int SingleSample::getFS()
 }
 
 
-double SingleSample::get_sample(double pos)
+double SingleSample::get_sample(int chan, double pos)
 {
-    /// Use linear interpolation to
-    /// get the next sample at the floating point
-    /// position in time!
 
-    if(pos>=1 && pos<L)
+    // Use linear interpolation to
+    // get the next sample at the floating point
+    // position index!
+
+
+    if(pos>=0 && pos<=L)
     {
 
         double nearRound;
@@ -126,29 +112,33 @@ double SingleSample::get_sample(double pos)
         int lowerBound = (int) nearRound;
         int upperBound = lowerBound +1;
 
-        double lowerSP = x[lowerBound];
-        double upperSP = x[upperBound];
+        double lowerSP = x[chan][lowerBound];
+        double upperSP = x[chan][upperBound];
 
         double interp = (1-fract)*lowerSP + fract*upperSP;
         return interp;
     }
 
     else
+    {
         return 0;
+        cout << "Out of range!: "  << endl;
+    }
 }
-
 void SingleSample::step()
 {
 
-    pos = pos+rate;
+    double R = rate * GR;
+
+    pos = pos+R;
 
     // loop in forward playback
-    if(pos>=L)
-        pos = 0;
+    if(pos>F)
+        pos = 0 + pos-(double)F;
 
     // loop in reverse playback
     if(pos<0)
-        pos = L;
+        pos = F;
 
 }
 
@@ -156,7 +146,7 @@ void SingleSample::step()
 void SingleSample::read_wavefile(std::string filePath)
 {
 
-    cout << "Trying to read: " << filePath << endl;
+    cout << "Reading: " << filePath << endl;
 
     /// Open the audio file using sndfile!
     info.format = 0;
@@ -168,16 +158,43 @@ void SingleSample::read_wavefile(std::string filePath)
         //exit(-1);
     }
 
-    set_f(  info.frames);
-    set_sr(info.samplerate);
-    set_nChannels(info.channels);
+    //
+    F           = info.frames;
+    sr          = info.samplerate;
+    nChannels   = info.channels;
+    L           = info.frames * info.channels;
 
-    set_L(info.frames*info.channels);
+    //
+    GR = ((double) sr / (double) FS );
 
-    initialize();
+    cout << "GR:  " << GR << endl;
+    cout << "Fs:\t\t" << sr << endl;
+    cout << "Num Channels:\t" << nChannels << endl;
+    cout << "Num Samples:\t" << F << endl;
 
-    int num = sf_read_double (sf,x,info.frames*info.channels);
+    // read interleaved data
+    double* tmp = new double[L];
+    sf_count_t num     = sf_read_double(sf,tmp,L);
+    cout << "Read Frames:\t" << num << " of " << L << endl;
     sf_close(sf);
+
+    // allocate memory for deinterleaved channels
+    x = new double*[nChannels];
+    for(int i=0; i< nChannels; i++)
+    {
+        x[i] = new double[F];
+    }
+
+    // deinterleave into 'separate' arrays for L and R
+    int i=0;
+    for(int sampCNT=0; sampCNT<F; sampCNT++)
+    {
+        for(int chanCNT=0; chanCNT<nChannels; chanCNT++)
+        {
+            x[chanCNT][sampCNT] = tmp[i];
+            i++;
+        }
+    }
 
 }
 

@@ -15,7 +15,7 @@ endif
 # libraries to link
 LDFLAGS = -ljack -llo -lsndfile
 
-SRCS = wav_example.cpp oscman.cpp singlesample.cpp
+SRCS = main.cpp wav_example.cpp oscman.cpp singlesample.cpp
 DEPS = oscman.h gain_example.h
 
 all: wav_example
@@ -23,8 +23,8 @@ all: wav_example
 %.o: %.c $(DEPS)
 	$(CC) -c -o $@ $< $(CFLAGS) 
 
-wav_example: wav_example.o oscman.o singlesample.o
-	$(CC) $(DBFLAGS) -o wav_example wav_example.o oscman.o singlesample.o  $(LDFLAGS)
+wav_example: main.o wav_example.o oscman.o singlesample.o
+	$(CC) $(DBFLAGS) -o wav_example main.o wav_example.o oscman.o singlesample.o  $(LDFLAGS)
 
 
 clean:

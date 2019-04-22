@@ -2,4 +2,4 @@
 #
 # called by synth-user.service
 #
-/home/student/examples/gain_example/gain_example -c /home/student/examples/gain_example/config.yml
+/home/student/examples/wav_example/wav_example -f /home/student/wav/ALF_stereo.wav

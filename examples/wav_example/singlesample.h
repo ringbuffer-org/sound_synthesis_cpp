@@ -1,4 +1,5 @@
 /**
+ * \file singlesample.h
  * \class SingleSample
  *
  *
@@ -12,11 +13,9 @@
  *
  * \author Henrik von Coler
  *
- * \version $Revision: 0.5 $
+ * \version $Revision: 0.52$
  *
- * \date $Date: 2016/11/22 14:16:20 $
- *
- * Contact: voncoler@tu-berlin.de
+ * \date 2016-11-22
  *
  *
  */
@@ -27,7 +26,7 @@
 
 #include<iostream>
 
-#include <sndfile.h>
+#include <sndfile.hh>
 #include <string>
 #include <cmath>
 
@@ -39,22 +38,28 @@ using std::endl;
 class SingleSample
 {
 public:
-    SingleSample(std::string filePath);
+
+    SingleSample(std::string filePath, int fs);
     virtual ~SingleSample();
     void read_wavefile(std::string filePath);
 
     int get_L();
-    double* get_x();
+    double **get_x();
 
     void set_f(int in);
     void set_sr(int in);
     void set_nChannels(int in);
+    int get_nChannels();
+
     void set_L(int in);
+
 
     void initialize();
 
-    double get_sample(double pos);
-    double get_sample(int pos);
+
+    double get_sample(int chan, double pos);
+
+    //double get_sample(int chan, int pos);
 
     double get_rate();
     void   set_rate(double r);
@@ -64,7 +69,6 @@ public:
 
     void step();
 
-    void get_frame(int n, float *a);
 
     //void setResampleRate(double resRate);
     int getFS();
@@ -72,15 +76,20 @@ public:
 
 private:
 
+
     SNDFILE *sf;
     SF_INFO info;
 
+    int FS;
+
+    double GR;
 
     int num_channels;
-    int f,sr,nChannels;
+    int F,sr,nChannels;
     int num, L;
 
-    double* x;
+    double** x;
+
 
     double pos;
     double rate;

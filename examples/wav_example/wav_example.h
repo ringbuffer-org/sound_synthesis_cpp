@@ -33,18 +33,18 @@ private:
 
     SingleSample *sample;
 
-    int nChannels = 2;
+    int fs        = 0;
+
+    int nOutputs  = 2;
+
+    int nChannels;
 
     const char **ports;
 
     jack_client_t   *client;
     jack_status_t   status;
 
-    jack_port_t     **input_port;
     jack_port_t     **output_port;
-
-    jack_default_audio_sample_t **in, **out;
-
 
     /// The OSC manager object
     OscMan *oscman;
@@ -54,7 +54,7 @@ private:
     /// \param nframes
     /// \return
     ///
-    int process (jack_nframes_t nframes);
+    int process(jack_nframes_t nframes);
 
     ///
     /// \brief callback_process

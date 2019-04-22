@@ -39,14 +39,31 @@ private:
     double speed;
 
 
+    ///
+    ////// \brief OscMan::speed_callback
+    ////// \param path
+    ////// \param types
+    ////// \param argv
+    ////// \param argc
+    ////// \param data
+    ////// \param user_data
+    ////// \return
     static int speed_callback(const char *path, const char *types, lo_arg ** argv,
                                int argc, void *data, void *user_data);
 
 
 public:
 
+    ///
+    /// \brief OscMan::OscMan
+    /// \param p
+    ///
     OscMan(int p);
 
+    ///
+    /// \brief OscMan::get_speed
+    /// \return
+    ///
     double get_speed();
 
 
