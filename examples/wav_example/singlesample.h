@@ -53,16 +53,15 @@ public:
 
     void set_L(int in);
 
-
     void initialize();
 
+    double get_sample(int chan, int pos);
 
     double get_sample(int chan, double pos);
 
-    //double get_sample(int chan, int pos);
-
     double get_rate();
-    void   set_rate(double r);
+
+    void set_rate(double r);
 
     double get_pos();
     void set_pos(double p);
@@ -76,22 +75,33 @@ public:
 
 private:
 
-
     SNDFILE *sf;
     SF_INFO info;
 
     int FS;
 
-    double GR;
+    /// The resampling factor between
+    /// audio sample and interface.
+    double resFac;
 
     int num_channels;
-    int F,sr,nChannels;
-    int num, L;
 
+    /// The number of frames in the wav file
+    int nFrames;
+    ///
+    int fs_sample;
+    int nChannels;
+    int L;
+
+    ///
+    /// \brief x
+    /// The 2d-array with the sample data,
+    /// arranged as a matrix.
     double** x;
 
-
     double pos;
+
+    /// the playback rates
     double rate;
 
     double resampleFactor = 1;

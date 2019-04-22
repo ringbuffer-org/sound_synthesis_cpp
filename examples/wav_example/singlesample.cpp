@@ -55,12 +55,12 @@ double** SingleSample::get_x()
 
 void SingleSample::set_f(int in)
 {
-    F =  in;
+    nFrames =  in;
 }
 
 void SingleSample::set_sr(int in)
 {
-    sr =  in;
+    fs_sample =  in;
 }
 
 
@@ -84,10 +84,10 @@ void SingleSample::initialize()
 
 }
 
-//double SingleSample::get_sample(int chan, int pos)
-//{
-//     return x[chan][pos];
-//}
+double SingleSample::get_sample(int chan, int pos)
+{
+     return x[chan][pos];
+}
 
 int SingleSample::getFS()
 {
@@ -133,12 +133,12 @@ void SingleSample::step()
     pos = pos+R;
 
     // loop in forward playback
-    if(pos>F)
-        pos = 0 + pos-(double)F;
+    if(pos>nFrames)
+        pos = 0 + pos-(double)nFrames;
 
     // loop in reverse playback
     if(pos<0)
-        pos = F;
+        pos = nFrames;
 
 }
 
@@ -159,18 +159,18 @@ void SingleSample::read_wavefile(std::string filePath)
     }
 
     //
-    F           = info.frames;
-    sr          = info.samplerate;
+    nFrames     = info.frames;
+    fs_sample   = info.samplerate;
     nChannels   = info.channels;
     L           = info.frames * info.channels;
 
     //
-    GR = ((double) sr / (double) FS );
+    GR = ((double) fs_sample / (double) FS );
 
     cout << "GR:  " << GR << endl;
-    cout << "Fs:\t\t" << sr << endl;
+    cout << "Fs:\t\t" << fs_sample << endl;
     cout << "Num Channels:\t" << nChannels << endl;
-    cout << "Num Samples:\t" << F << endl;
+    cout << "Num Samples:\t" << nFrames << endl;
 
     // read interleaved data
     double* tmp = new double[L];
@@ -182,12 +182,12 @@ void SingleSample::read_wavefile(std::string filePath)
     x = new double*[nChannels];
     for(int i=0; i< nChannels; i++)
     {
-        x[i] = new double[F];
+        x[i] = new double[nFrames];
     }
 
     // deinterleave into 'separate' arrays for L and R
     int i=0;
-    for(int sampCNT=0; sampCNT<F; sampCNT++)
+    for(int sampCNT=0; sampCNT<nFrames; sampCNT++)
     {
         for(int chanCNT=0; chanCNT<nChannels; chanCNT++)
         {
