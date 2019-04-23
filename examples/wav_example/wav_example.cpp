@@ -1,6 +1,6 @@
 /**
 *
-* \file  WavExample.cpp
+* \file  wav_example.cpp
 * \class WavExample
 *
 * \brief Read a wave file and play it back in a loop.
@@ -32,7 +32,7 @@ WavExample::WavExample(std::string filename){
 
     nChannels = sample->get_nChannels();
 
-    cout << "Starting Jack Client with " << nChannels  << " outputs!" << endl;
+    cout << "Starting Jack Client! " << endl;
 
 
     jack_set_process_callback(this->client, this->callback_process, this);
@@ -46,8 +46,6 @@ WavExample::WavExample(std::string filename){
                                              JACK_DEFAULT_AUDIO_TYPE,
                                              JackPortIsOutput, 0);
     }
-
-
 
     jack_activate(this->client);
 

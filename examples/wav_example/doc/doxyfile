@@ -1,9 +1,9 @@
-PROJECT_NAME           = "Gain_Example"                           
+PROJECT_NAME           = "Wav_Example"                           
 
-PROJECT_BRIEF          = "Stereo gain manipulation through OSC!"    
+PROJECT_BRIEF          = "Simple wav file looper with adjustable playback speed!"    
 
 OUTPUT_DIRECTORY       = "./"                                                                                      
-INPUT                  = "../"                                          
+INPUT                  = "../" README.md                                       
 
 FILE_PATTERNS          = *.cpp *.h
 
@@ -15,3 +15,5 @@ EXTRACT_PRIVATE	       = YES
 
 HAVE_DOT               = YES
 UML_LOOK               = YES
+
+USE_MOFILE_AS_MAINPAGE = README.md

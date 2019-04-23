@@ -1,6 +1,6 @@
 /**
-* \file GainExample.h
-* \class GainExample
+* \file wav_example.h
+* \class WavExample
 *
 * \brief Simple example, passing the input to the output
 *        with gain modification through OSC.
@@ -33,24 +33,38 @@ private:
 
     SingleSample *sample;
 
+    ///
+    /// \brief fs
+    /// sample rate of the jack server
     int fs        = 0;
 
+    ///
+    /// \brief nOutputs
+    ///  number off jack output ports
     int nOutputs  = 2;
 
+    ///
+    /// \brief nChannels
+    /// number of cahnnels in the sample
     int nChannels;
 
+    ///
+    /// \brief ports
+    /// the jack output ports
     const char **ports;
+
 
     jack_client_t   *client;
     jack_status_t   status;
 
-    jack_port_t     **output_port;
+    jack_port_t  **output_port;
 
     /// The OSC manager object
     OscMan *oscman;
 
     ///
     /// \brief process
+    ///     get the next buffer from the sample and playback
     /// \param nframes
     /// \return
     ///
@@ -68,7 +82,7 @@ public:
 
     ///
     /// \brief GainExample
-    ///        Default constructor!
+    ///        Constructor!
     WavExample(std::string filename);
 
 };
