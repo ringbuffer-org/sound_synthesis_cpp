@@ -1,6 +1,6 @@
-PROJECT_NAME           = "Wav_Example"                           
+PROJECT_NAME           = "Granular_Example"                           
 
-PROJECT_BRIEF          = "Simple wav file looper with adjustable playback speed!"    
+PROJECT_BRIEF          = "Simple granular example  playback speed!"    
 
 OUTPUT_DIRECTORY       = "./"                                                                                      
 INPUT                  = "../" README.md                                       

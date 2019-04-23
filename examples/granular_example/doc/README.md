@@ -1,14 +1,13 @@
-wav_example {#mainpage}
+granular__example {#mainpage}
 =======================
 
 # BRIEF
 
-This example introduces the libsndfile
-for reading a wav file and playing it
-back in a loop. It is able to process
-mono and stereo files.
+This example uses the SingleSample
+class in comination with a TriangularWindow
+class for a basic granular synthesis.
 
-The playback speed (resampling) can be
+The playback speed (analysis window rate) can be
 controlled using OSC. The OSC path
 and port are hardcoded in the file
 WavExample.cpp and oscman.cpp.
@@ -23,8 +22,11 @@ The following libraries are used within this project:
 
 # Usage
 
-The binaray gain_example expects one command
-line argument for wav file to read with the
-flag '-f':
+The binaray granular_example expects three
+command line arguments:
 
-./gain_example -f ../wav/stereo_sine.wav
+- the wav file to read with the flag '-f'
+- the grain size in samples '-l'
+- the number of windows to be used '-n
+
+./granular_example -f ../../wav/wos\ der\ chef.wav -l 1000 -n 4
