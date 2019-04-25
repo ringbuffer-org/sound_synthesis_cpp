@@ -20,7 +20,13 @@ GranularExample::GranularExample(std::string filename, int win_size, int nWindow
 {
 
     // creating an OSC manager instance
-    oscman = new OscMan(5111);
+    try{
+        oscman = new OscMan(5111);
+    }
+    catch(int e)
+    {
+        cout << "Bad Port!";
+    }
 
     this->client = jack_client_open("Grain_Example", JackNullOption, &status, NULL);
 
@@ -74,7 +80,7 @@ int GranularExample::process (jack_nframes_t nframes)
     // loop over all samples of output buffer
     for(int sampCNT=0; sampCNT<nframes; sampCNT++)
     {
-            out[0][sampCNT] = grainer->get_sample();
+        out[0][sampCNT] = grainer->get_sample();
     }
     return 0;
 }

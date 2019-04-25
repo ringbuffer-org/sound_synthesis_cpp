@@ -20,3 +20,4 @@ wav_example: main.o wav_example.o oscman.o singlesample.o
 
 clean:
 	rm *.o wav_example
+
