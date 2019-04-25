@@ -26,7 +26,7 @@ int TriangularWindow::get_relative_position()
     return center_offset - playback_position;
 }
 
-int TriangularWindow::increment_relative_position(double p, int maxLength)
+void TriangularWindow::increment_relative_position(double p, int maxLength)
 {
     int v = center_offset + (int) ((double) length * p);
 
@@ -40,6 +40,7 @@ int TriangularWindow::step()
 
     int finished = 0;
 
+    // the
     playback_position+=1;
 
     if(playback_position>=length)

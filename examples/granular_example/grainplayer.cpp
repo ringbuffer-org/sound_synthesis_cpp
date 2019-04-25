@@ -1,3 +1,5 @@
+
+
 #include "grainplayer.h"
 
 GrainPlayer::GrainPlayer(std::string filePath, int fs, int win_size, int nWin)
@@ -22,28 +24,32 @@ GrainPlayer::GrainPlayer(std::string filePath, int fs, int win_size, int nWin)
 
 double GrainPlayer::get_sample()
 {
+
     double output = 0;
 
+    // loop over all windows
     for(int windowCNT=0; windowCNT<nWindows; windowCNT++)
     {
 
-
+        // get gain of this window
         double tmpGain = windows[windowCNT].get_value();
+        // get the relative position of this window
         int tmpPos     = windows[windowCNT].get_relative_position();
-        double tmpOut  = 0;
 
+
+
+        // only if we are within the sample boundaries
         if(tmpPos >= 0 && tmpPos <= sample->get_nFrames())
         {
-            tmpOut  = tmpGain * sample->get_sample(0,tmpPos);
+            // add grain value to output
+            output += tmpGain * sample->get_sample(0,tmpPos);
         }
 
-        output += tmpOut;
-
-        int f = windows[windowCNT].step();
-        if(f==1)
+        // if this grain (window) has reached its end
+        if(windows[windowCNT].step()==1)
         {
-           int tmpVal =  windows[windowCNT].increment_relative_position(relative_stepsize,sample->get_nFrames());
-
+           // move this grain (window) position
+           windows[windowCNT].increment_relative_position(relative_stepsize,sample->get_nFrames());
         }
     }
 
@@ -57,7 +63,4 @@ void GrainPlayer::set_relative_distance(double r)
     relative_stepsize = r;
 }
 
-double GrainPlayer::get_position()
-{
 
-}

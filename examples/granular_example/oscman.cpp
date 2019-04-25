@@ -26,20 +26,16 @@ OscMan::OscMan(int p)
     if (st->is_valid())
     {
 
+        // Add the example handler to the server!
+        st->add_method("/speed", "f", speed_callback, this);
 
+        st->start();
 
-
-
-    // Add the example handler to the server!
-    st->add_method("/speed", "f", speed_callback, this);
-
-    st->start();
-
-    std::cout << "Started OSC Server!" << std::endl;
+        std::cout << "Started OSC Server!" << std::endl;
 
     }
-else
-throw std::invalid_argument("OSC server not started - possibly a bad port!");
+    else
+        throw std::invalid_argument("OSC server not started - possibly a bad port!");
 }
 
 

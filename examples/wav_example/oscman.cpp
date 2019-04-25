@@ -21,24 +21,23 @@ OscMan::OscMan(int p)
 
     speed = 1.0;
 
-    try
+
+    st = new lo::ServerThread(port);
+
+    if (st->is_valid())
     {
-        st = new lo::ServerThread(port);
-    }
-    catch (int e)
-    {
-        std::cout << "Possibly a bad port!" << std::endl;
+
+        // Add the example handler to the server!
+        st->add_method("/speed", "f", speed_callback, this);
+
+        st->start();
+
+        std::cout << "Started OSC Server!" << std::endl;
 
     }
-
-    // Add the example handler to the server!
-    st->add_method("/speed", "f", speed_callback, this);
-
-    st->start();
-
-    std::cout << "Started OSC Server!" << std::endl;
+    else
+        throw std::invalid_argument("OSC server not started - possibly a bad port!");
 }
-
 
 int OscMan::speed_callback(const char *path, const char *types, lo_arg ** argv,
 int argc, void *data, void *user_data )

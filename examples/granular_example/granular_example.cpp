@@ -33,11 +33,14 @@ GranularExample::GranularExample(std::string filename, int win_size, int nWindow
     fs = jack_get_sample_rate(client);
 
 
-
-    // hard coded for now
+    // create a ne grain player
     grainer = new GrainPlayer(filename, fs, win_size, nWindows);
 
     nChannels = 1;
+
+    // -----------------------------------------------------------------------
+    // standard JACK startup:
+    // -----------------------------------------------------------------------
 
     cout << "Starting Jack Client! " << endl;
 
@@ -58,7 +61,11 @@ GranularExample::GranularExample(std::string filename, int win_size, int nWindow
     jack_connect(client, jack_port_name(output_port[0]), "system:playback_1");
     jack_connect(client, jack_port_name(output_port[1]), "system:playback_2");
 
+    // run forever
     sleep(-1);
+
+    // -----------------------------------------------------------------------
+
 
 }
 

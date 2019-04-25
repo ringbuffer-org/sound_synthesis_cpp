@@ -29,4 +29,6 @@ command line arguments:
 - the grain size in samples '-l'
 - the number of windows to be used '-n
 
-./granular_example -f ../../wav/wos\ der\ chef.wav -l 1000 -n 4
+```console
+~/examples/granular_example $ ./granular_example -f ../../wav/ALF_8bitDRY.wav -l 1000 -n 4 
+```
