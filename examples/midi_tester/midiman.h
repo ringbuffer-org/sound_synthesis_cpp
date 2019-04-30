@@ -2,14 +2,15 @@
  * \class MidiMan
  *
  *
- * \brief Class which parses and stores the incoming MIDI messages.
+ * \brief Reduced version of the MIDI manager class
+ *        for controller mappings.
  *
  *
  * \author Henrik von Coler
  *
  * \version $Revision: 0.5 $
  *
- * \date $Date: 2005/04/14 14:16:20 $
+ * \date $Date: 2019/04/30 14:16:20 $
  *
  * Contact: von_coler@tu-berlin.de
  *
@@ -41,6 +42,7 @@ class MidiMan
 
 public:
 
+    /// struct for holding a MIDI message
     typedef struct  {
         int byte1	      = -1;
         int byte2             = -1;
@@ -49,59 +51,52 @@ public:
 
     }midiMessage;
 
+    ///
+    /// \brief MidiMan
+    /// \param device_ID
+    ///
     MidiMan(int device_ID);
+
+    ///
     ~MidiMan();
 
-    std::vector<std::string> returnAllNames();
-
-    void updateMidiMessages(void *port_buf);
-    void parseMidiMessages();
-
-    void addNoteOnMessage(int in[3]);
-    std::vector<noteMessage> getNoteOnMessages();
-    void clearNoteOnMessages();
-
-    void addNoteOffMessage(int in[3]);
-    std::vector<noteMessage> getNoteOffMessages();
-    void clearNoteOffMessages();
-
-    void eraseNoteOnMessage(int position);
-
-    void addFaderMessage(ctlMessage m);
-
-    void markOnMessageProcessed(int pos);
-    void markOffMessageProcessed(int pos);
-
+    ///
+    /// \brief flushProcessedMessages
+    ///
     void flushProcessedMessages();
 
-    ctlMessage getLastFaderMessage();
-
-    int getNumFaderMessages();
-
-    static void finish(int ignore);
-
+    ///
+    /// \brief get_midi_messages
+    /// \return
+    ///
     midiMessage get_midi_messages();
 
+    ///
+    /// \brief setVerbose
+    ///
     void setVerbose();
-
-
 
 private:
 
-    // rtmidi
+    ///
+    /// \brief done
+    ///
     static bool done;
 
+    ///
+    /// \brief midiin
+    ///
     RtMidiIn *midiin;
-    int nBytes, i;
-    double stamp;
+
+    ///
+    /// \brief isVerbose
+    ///
     bool isVerbose = true;
 
+    ///
+    /// \brief val
+    ///
     std::vector<int>   val;
-
-    noteMessage *tmpNote;
-
-    void mycallback( double deltatime, std::vector< unsigned char > *message, void *userData );
-
 
 };
 

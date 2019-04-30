@@ -11,7 +11,6 @@
  *
  * \date $Date: 2005/04/14 14:16:20 $
  *
- * Contact: von_coler@intelligent-noise-solutions.de
  *
  *
  */

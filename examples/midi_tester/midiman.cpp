@@ -38,8 +38,8 @@ MidiMan::midiMessage MidiMan::get_midi_messages()
 
     int nBytes = 1;
 
-    /// this is kind of a dirty workaroud -
-    /// we loop over all in-massages and take the last one:
+    // this is kind of a dirty workaroud -
+    // we loop over all in-massages and take the last one:
     while(nBytes>0)
     {
 
@@ -47,11 +47,11 @@ MidiMan::midiMessage MidiMan::get_midi_messages()
 
         nBytes = a.size();
 
-        /// only do something if bytes are received
+        // only do something if bytes are received
         if(nBytes!=0)
         {
 
-            /// only give feedback if 'verbose-mode' is active
+            // only give feedback if 'verbose-mode' is active
             if(isVerbose == true  )
             {
                 std::cout << "Received " << nBytes << " Bytes: " ;
@@ -75,13 +75,6 @@ MidiMan::midiMessage MidiMan::get_midi_messages()
     return mm;
 }
 
-
-
-
-//////////////////////////////////////////////////////////////////
-// FLUSH
-//////////////////////////////////////////////////////////////////
-
 void MidiMan::flushProcessedMessages()
 {
 
@@ -90,14 +83,6 @@ void MidiMan::flushProcessedMessages()
 
 }
 
-
-int MidiMan::getNumFaderMessages()
-{
-
-    int v  = (int) val.size();
-
-    return v;
-}
 
 
 
