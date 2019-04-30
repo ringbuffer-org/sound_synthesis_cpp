@@ -19,18 +19,16 @@ OscMan::OscMan(int p)
 
     port  = p;
 
-    speed = 0;
+    speed = 0.05;
 
     st = new lo::ServerThread(port);
 
     if (st->is_valid())
     {
-
         // Add the example handler to the server!
         st->add_method("/speed", "f", speed_callback, this);
-
+        // start, obviously
         st->start();
-
         std::cout << "Started OSC Server!" << std::endl;
 
     }
