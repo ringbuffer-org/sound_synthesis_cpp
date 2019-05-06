@@ -20,7 +20,7 @@ wav/
 
 # *
 # *~
-# *.o
+*.o
 *html/
 *latex/
 
