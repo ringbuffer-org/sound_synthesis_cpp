@@ -13,7 +13,7 @@
 #ifndef OSCMAN_H
 #define OSCMAN_H
 
- 
+
 // works with 'self built'
 
 #include <lo/lo.h>

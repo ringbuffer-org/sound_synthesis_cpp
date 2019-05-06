@@ -1,23 +1,34 @@
-# define the compiler
-CC      = g++
+EXECUTABLE = gain_example
 
 # path(s) to include files
-CFLAGS  = -I.
+CFLAGS  = -std=c++11 -Wall -I.
 
 # libraries to link
 LDFLAGS = -ljack -llo -lyaml-cpp
 
+SRC_DIR = src
+OBJ_DIR = obj
+
 # all sources and dependencies
-SRCS = main.cpp gain_example.cpp oscman.cpp yamlman.cpp
-DEPS = oscman.h gain_example.h yamlman.h
+SRC = $(wildcard $(SRC_DIR)/*.cpp)
+OBJ = $(SRC:$(SRC_DIR)/%.cpp=$(OBJ_DIR)/%.o)
+DEP = $(OBJ:.o=.d)
 
-all: gain_example
+.PHONY: all clean
 
-%.o: %.c $(DEPS)
-	$(CC) -c -o $@ $< $(CFLAGS) 
+all: $(EXECUTABLE)
 
-gain_example: main.o gain_example.o oscman.o yamlman.o
-	$(CC) -o gain_example main.o gain_example.o oscman.o yamlman.o $(LDFLAGS)
+# gain_example: main.o gain_example.o oscman.o yamlman.o
+$(EXECUTABLE): $(OBJ)
+	$(CXX) $(LDFLAGS) $^ -o $@
+
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp | $(OBJ_DIR)
+	$(CXX) $(CFLAGS) -o $@ -c $<
+
+$(OBJ_DIR):
+	mkdir $@
 
 clean:
-	rm *.o gain_example
+	$(RM) -r $(OBJ_DIR) $(EXECUTABLE)
+
+-include $(DEP)

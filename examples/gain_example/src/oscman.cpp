@@ -60,5 +60,3 @@ double OscMan::get_gain()
 {
     return gain;
 }
-
-
