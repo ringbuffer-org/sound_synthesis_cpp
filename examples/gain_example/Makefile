@@ -18,7 +18,6 @@ DEP = $(OBJ:.o=.d)
 
 all: $(EXECUTABLE)
 
-# gain_example: main.o gain_example.o oscman.o yamlman.o
 $(EXECUTABLE): $(OBJ)
 	$(CXX) $(LDFLAGS) $^ -o $@
 
