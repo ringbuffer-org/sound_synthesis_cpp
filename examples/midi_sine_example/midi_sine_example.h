@@ -20,7 +20,6 @@
 
 #include<jack/jack.h>
 
-#include "oscman.h"
 #include "midiman.h"
 #include "sinusoid.h"
 
@@ -59,9 +58,6 @@ private:
 
     jack_port_t  **output_port;
 
-    /// The OSC manager object
-    OscMan *oscman;
-
     /// an array of sinusoids
     Sinusoid *sines;
 
@@ -85,11 +81,8 @@ private:
 
 public:
 
-    /// \brief GainExample
+    /// \brief MidiSineExample
     ///        Constructor!
     MidiSineExample(int ID, int nPart);
 
 };
-
-
-
