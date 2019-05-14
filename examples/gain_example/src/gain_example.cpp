@@ -103,4 +103,3 @@ int GainExample::callback_process(jack_nframes_t x, void* object)
 {
     return static_cast<GainExample*>(object)->process(x);
 }
-

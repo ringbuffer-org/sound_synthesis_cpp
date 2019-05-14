@@ -1,23 +1,52 @@
-# define the compiler
-CC      = g++
+# Parts of this Makefile (especially the explanations) are based on this
+# StackOverflow answer:
+# https://stackoverflow.com/a/31610364
 
-# path(s) to include files
-CFLAGS  = -I.
+# Specify the name of the executable that will be compiled:
+EXECUTABLE = gain_example
 
-# libraries to link
-LDFLAGS = -ljack -llo -lyaml-cpp
+# Specify source code directory:
+SRC_DIR = src
+# Get a list of all the source files:
+SRC = $(wildcard $(SRC_DIR)/*.cpp)
 
-# all sources and dependencies
-SRCS = main.cpp gain_example.cpp oscman.cpp yamlman.cpp
-DEPS = oscman.h gain_example.h yamlman.h
+# Specify where to put the object (.o) files:
+OBJ_DIR = obj
+# Get a list of the object files that correspond to the source files:
+OBJ = $(SRC:$(SRC_DIR)/%.cpp=$(OBJ_DIR)/%.o)
 
-all: gain_example
+# From the object file list, get the dependency file list to handle automatic
+# recompilation when a header file is modified:
+DEP = $(OBJ:.o=.d)
 
-%.o: %.c $(DEPS)
-	$(CC) -c -o $@ $< $(CFLAGS) 
+# Required flags to enable the automatic dependency generation by the compiler:
+CPPFLAGS = -MMD -MP
 
-gain_example: main.o gain_example.o oscman.o yamlman.o
-	$(CC) -o gain_example main.o gain_example.o oscman.o yamlman.o $(LDFLAGS)
+# C++ compiler flags:
+CXXFLAGS  = -std=c++11 -Wall -I.
 
+# Libraries to link (linker flags):
+LDFLAGS = -ljack -llo -lyaml-cpp -lsndfile
+
+# Tell make that these target are not real files:
+.PHONY: all clean
+
+all: $(EXECUTABLE)
+
+$(EXECUTABLE): $(OBJ)
+	$(CXX) $(LDFLAGS) $^ -o $@
+
+# The build directory is custom so we need to tell make how to do it, also it
+# must exist before trying to compile:
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp | $(OBJ_DIR)
+	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -o $@ -c $<
+
+# Create obj directory if it doesn't exist:
+$(OBJ_DIR):
+	mkdir $@
+
+# On clean, remove obj directory and executable
 clean:
-	rm *.o gain_example
+	$(RM) -r $(OBJ_DIR) $(EXECUTABLE)
+
+-include $(DEP)

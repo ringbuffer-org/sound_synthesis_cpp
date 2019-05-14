@@ -1,5 +1,7 @@
 !*.*
 
+examples/*/obj/
+
 .bash_history
 .bash_logout
 .bashrc
@@ -16,9 +18,8 @@ gain.pd
 liblo/
 wav/
 
-
-*
-*~
+# *
+# *~
 *.o
 *html/
 *latex/
