@@ -1,13 +1,13 @@
 /**
-* \file gain_example.h
-* \class GainExample
+* \file am_example.h
+* \class AmExample
 *
 * \brief Simple example, passing the input to the output
-*        with gain modification through OSC.
+*        with amplitude modulation through OSC.
 *
 * \author Henrik von Coler
 *
-* \date $Date: 2019/03/18 $
+* \date $Date: 2019/05/14 $
 *
 */
 
@@ -36,11 +36,14 @@ private:
     ///        is used for reading the config file
     YamlMan *yaml_manager;
 
+    ///
+    /// \brief fs
+    /// the jack server sampling rate
     int fs;
 
     ///
     /// \brief carrier
-    ///
+    /// the carrier signal for the AM
     Sinusoid *carrier;
 
     ///

@@ -1,14 +1,13 @@
-gain_example {#mainpage}
+am_example {#mainpage}
 =======================
 
 # BRIEF
 
-This example introduces the basic
-libraries and tools used in the
-Sound Synthesis class. It passes
-audio from the inputs to the outputs,
-allowing to set the gain using an OSC
-interface.
+This example uses amplitude modulation
+on the input signal of the audio interface.
+The carrier frequency can be controlled
+using OSC.
+
 
 # Libraries
 

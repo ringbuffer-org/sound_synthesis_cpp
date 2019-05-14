@@ -3,7 +3,7 @@
 * \class AmExample
 *
 * \brief Am example - modulates the audio
-* iput of the interface with a OSC controlled sinusoid.
+* input of the interface with a OSC controlled sinusoid.
 *
 * \author Henrik von Coler
 *

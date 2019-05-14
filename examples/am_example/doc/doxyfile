@@ -1,6 +1,7 @@
-PROJECT_NAME           = "Gain_Example"                           
+PROJECT_NAME           = "AM_Example"                           
 
-PROJECT_BRIEF          = "Simple gain manipulation through OSC!"    
+PROJECT_BRIEF          = "AM modulation of the audio interface input
+		       	 with OSC control!"    
 
 OUTPUT_DIRECTORY       = "./"                                                                                      
 INPUT                  = "../" README.md                                       
