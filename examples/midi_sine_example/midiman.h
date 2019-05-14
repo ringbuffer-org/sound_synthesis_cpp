@@ -42,7 +42,7 @@ class MidiMan
 public:
 
     typedef struct  {
-        int byte1		  = -1;
+        int byte1	      = -1;
         int byte2             = -1;
         double byte3          = -1;
         bool hasBeenProcessed = false;

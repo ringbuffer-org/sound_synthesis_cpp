@@ -112,7 +112,10 @@ int MidiSineExample::process (jack_nframes_t nframes)
         // set alll partial frequencies and amplitudes
         for (int i=0; i<nPartials; i++)
         {
+
+
             sines[i].amplitude(0.1 * 1/(i+1));
+
             sines[i].frequency(f0* (double) (i+1));
         }
     }

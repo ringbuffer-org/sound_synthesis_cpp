@@ -3,8 +3,6 @@
 #include <iostream>
 #include "midi_sine_example.h"
 
-
-
 using std::cout;
 using std::endl;
 
