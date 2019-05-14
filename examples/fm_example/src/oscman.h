@@ -36,43 +36,30 @@ private:
     /// the IP port to be opened
     int port;
 
-    ///
+    /// a server thread
     lo::ServerThread *st;
 
 
+    /// the carrier frequency
     double f_c;
+
+    /// the modulation frequency
     double f_m;
 
+    /// the modulation index
     double idx;
 
+    /// the master gain
     double gain;
 
     // -------------------------------------------------------------------------
     // All the callback functions
     // -------------------------------------------------------------------------
 
-    ///
-    ////// \brief OscMan::gain_callback
-    ////// \param path
-    ////// \param types
-    ////// \param argv
-    ////// \param argc
-    ////// \param data
-    ////// \param user_data
-    ////// \return
     static int mod_callback(const char *path, const char *types, lo_arg ** argv,
                                int argc, void *data, void *user_data);
 
-    ///
-    /// \brief car_callback
-    /// \param path
-    /// \param types
-    /// \param argv
-    /// \param argc
-    /// \param data
-    /// \param user_data
-    /// \return
-    ///
+
     static int car_callback(const char *path, const char *types, lo_arg ** argv,
                                int argc, void *data, void *user_data);
 
@@ -92,24 +79,34 @@ public:
 
 
     ///
-    /// \brief OscMan::OscMan
-    ///         The constructor
+    /// \brief OscMan
+    /// constructor
     /// \param yaml_manager
     ///
     OscMan(YamlMan *yaml_manager);
 
     ///
+    /// \brief get_carrier
+    /// \return the carrier frequency
     double get_carrier();
 
     ///
-    /// \brief OscMan::get_gain
-    /// \return the gain value [double]
+    /// \brief get_mod
+    /// \return th modulation frequency
     ///
     double get_mod();
 
+    ///
+    /// \brief get_idx
+    /// \return the modulation index
+    ///
     double get_idx();
 
-     double get_gain();
+    ///
+    /// \brief get_gain
+    /// \return the master gain
+    ///
+    double get_gain();
 
 };
 

@@ -18,9 +18,9 @@ OscMan::OscMan(YamlMan *yaml_manager)
 {
 
     port = yaml_manager->return_port();
-
     cout << "Receiving OSC on port: " << port << std::endl;
 
+    // set defaults
     f_m  = 100;
     f_c  = 200;
     idx  = 10;
