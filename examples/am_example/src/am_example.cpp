@@ -83,6 +83,7 @@ int AmExample::process(jack_nframes_t nframes)
 
     // get the recent carrier frequency
     // value from the OSC manager
+    double tmpGain  = oscman->get_gain();
     double shift = oscman->get_shift();
 
     // set sinusoid parameter
@@ -106,7 +107,7 @@ int AmExample::process(jack_nframes_t nframes)
         for(int chanCNT=0; chanCNT<nChannels; chanCNT++)
         {
             // apply AM
-            out[chanCNT][sampCNT] = in[chanCNT][sampCNT] * tmpVal ;
+            out[chanCNT][sampCNT] = in[chanCNT][sampCNT] * tmpVal * tmpGain ;
         }
     }
 

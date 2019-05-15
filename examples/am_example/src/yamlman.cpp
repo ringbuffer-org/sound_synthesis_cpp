@@ -21,7 +21,8 @@ YamlMan::YamlMan(std::string filepath)
 
     // read values
     port = config["port"].as<int>();
-    path = config["path"].as<std::string>();
+    path1 = config["path1"].as<std::string>();
+    path2 = config["path2"].as<std::string>();
 
 }
 
@@ -33,11 +34,12 @@ int YamlMan::return_port()
 
 }
 
-std::string YamlMan::return_path()
+std::string YamlMan::return_path_1()
 {
-
-    return path;
-
+    return path1;
 }
 
-
+std::string YamlMan::return_path_2()
+{
+    return path2;
+}

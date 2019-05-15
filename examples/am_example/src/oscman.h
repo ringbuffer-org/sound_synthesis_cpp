@@ -39,8 +39,22 @@ private:
     ///
     lo::ServerThread *st;
 
-    /// The actual gain value
+    /// The actual shift value
+    double shift;
+    /// The master gain value
     double gain;
+
+    ///
+    ////// \brief OscMan::shift_callback
+    ////// \param path
+    ////// \param types
+    ////// \param argv
+    ////// \param argc
+    ////// \param data
+    ////// \param user_data
+    ////// \return
+    static int shift_callback(const char *path, const char *types, lo_arg ** argv,
+                               int argc, void *data, void *user_data);
 
     ///
     ////// \brief OscMan::gain_callback
@@ -66,10 +80,16 @@ public:
     OscMan(YamlMan *yaml_manager);
 
     ///
-    /// \brief OscMan::get_gain
-    /// \return the gain value [double]
+    /// \brief OscMan::get_shift
+    /// \return the shift value [double]
     ///
     double get_shift();
+
+    ///
+    /// \brief get_gain
+    /// \return the master gain
+    ///
+    double get_gain();
 
 
 };
