@@ -30,8 +30,8 @@ SubtractiveExample::SubtractiveExample(YamlMan *ym, int ID, string m){
     oscman = new OscMan(yaml_manager);
 
     // allocate a midi manager
-    midiman = new MidiMan(ID);
-
+    if(mode.compare("MIDI")==0)
+        midiman = new MidiMan(ID);
 
     // allocate and initialize the
     // square wave oscillator
@@ -181,10 +181,11 @@ int SubtractiveExample::process(jack_nframes_t nframes)
             }
         }
 
+        // after processing, we flush all the messages
+        midiman->flush_all_messages();
+
     }
-    // after processing, we flush all the messages
-    // (even in OSC mode)
-    midiman->flush_all_messages();
+
 
     // -------------------------------------------------
     // get output buffers

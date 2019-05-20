@@ -1,4 +1,4 @@
-#N canvas 1 106 1920 974 10;
+#N canvas 0 106 1920 974 10;
 #X obj 913 751 netsend -u -b;
 #X obj 913 614 list prepend send;
 #X obj 913 637 list trim;
@@ -30,7 +30,6 @@
 #X obj 354 326 metro 1000;
 #X msg 456 437 1 \$1;
 #X floatatom 380 380 5 0 0 0 - - -, f 5;
-#X text 620 347 attack langth in sec;
 #X text 814 335 release length in sec;
 #X text 1038 335 pulsewidth (0-1);
 #X text 1292 341 filter release rate;
@@ -38,6 +37,7 @@
 #X text 288 233 auto trigger;
 #X text 259 379 note frequency (Hz);
 #X text 391 266 trigger distance (ms);
+#X text 620 347 attack length in sec;
 #X connect 1 0 2 0;
 #X connect 2 0 0 0;
 #X connect 3 0 0 0;
@@ -67,4 +67,4 @@
 #X connect 27 0 29 0;
 #X connect 28 0 26 0;
 #X connect 29 0 28 0;
-#X connect 34 0 27 1;
+#X connect 33 0 27 1;
