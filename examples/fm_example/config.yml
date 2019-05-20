@@ -1,5 +1,5 @@
 port: 6666
-path1: "/carrier" 
-path2: "/modulator"
+path2: "/carrier" 
+path1: "/modulator"
 path3: "/index"
 path4: "/gain"

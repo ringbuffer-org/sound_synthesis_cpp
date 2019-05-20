@@ -1,4 +1,4 @@
-#N canvas 1921 105 1918 974 10;
+#N canvas 0 106 1920 974 10;
 #X obj 190 208 osc~;
 #X obj 190 231 snapshot~;
 #X obj 279 213 metro 10;
@@ -46,8 +46,8 @@
 #X text 737 317 mod freq: 450;
 #X text 954 317 index;
 #X text 1122 316 gain;
-#X msg 636 131 set 2000;
 #X text 256 147 modulate index;
+#X msg 636 131 set 5000;
 #X connect 0 0 1 0;
 #X connect 1 0 32 0;
 #X connect 2 0 1 0;
@@ -63,7 +63,7 @@
 #X connect 12 0 7 0;
 #X connect 13 0 14 0;
 #X connect 14 0 8 0;
-#X connect 15 0 45 0;
+#X connect 15 0 46 0;
 #X connect 15 0 16 0;
 #X connect 15 0 17 0;
 #X connect 16 0 6 0;
@@ -88,4 +88,4 @@
 #X connect 35 0 34 0;
 #X connect 37 0 36 0;
 #X connect 38 0 6 0;
-#X connect 45 0 34 0;
+#X connect 46 0 34 0;

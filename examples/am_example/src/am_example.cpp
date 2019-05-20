@@ -106,7 +106,7 @@ int AmExample::process(jack_nframes_t nframes)
         for(int chanCNT=0; chanCNT<nChannels; chanCNT++)
         {
             // apply AM
-            out[chanCNT][sampCNT] = in[chanCNT][sampCNT] * tmpVal ;
+            out[chanCNT][sampCNT] = in[chanCNT][sampCNT] * (1+tmpVal)/2 ;
         }
     }
 
