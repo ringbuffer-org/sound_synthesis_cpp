@@ -36,9 +36,14 @@ private:
     /// The OSC port to be used for receiving messages
     int port;
 
-    /// \brief path
-    /// The OSC path used for the parameter
-    std::string path;
+    /// \brief path1
+    /// The OSC path used for the first parameter
+    std::string path1;
+
+    /// \brief path2
+    /// The OSC path used for the second parameter
+    std::string path2;
+
 
 public:
 
@@ -51,12 +56,15 @@ public:
     /// \return The OSC port to be used
     int return_port();
 
-    /// \brief return_path
-    ///         Returns the OSC path used
-    ///         to change the gain of the signal.
+    /// \brief return_path_1
     ///
-    /// \return The OSC path.
-    string return_path();
+    /// \return getter for path #1
+    string return_path_1();
+
+    /// \brief return_path_2
+    ///
+    /// \return getter for path #2
+    string return_path_2();
 
 };
 
