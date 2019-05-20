@@ -1,0 +1,19 @@
+PROJECT_NAME           = "Subtractive_Example"                           
+
+PROJECT_BRIEF          = "Simple Subtractive with OSC control!"    
+
+OUTPUT_DIRECTORY       = "./"                                                                                      
+INPUT                  = "../" README.md                                       
+
+FILE_PATTERNS          = *.cpp *.h
+
+RECURSIVE              = YES                                                                                                                                 
+FILTER_SOURCE_FILES    = NO
+
+# deactivate when done with major changes
+EXTRACT_PRIVATE	       = YES
+
+HAVE_DOT               = YES
+UML_LOOK               = YES
+
+USE_MOFILE_AS_MAINPAGE = README.md

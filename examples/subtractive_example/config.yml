@@ -1,0 +1,11 @@
+port: 6666
+
+ctl1: 14
+ctl2: 15
+ctl3: 16
+ctl4: 17
+
+path1: "/attack"
+path2: "/release" 
+path3: "/pulsewidth"
+path4: "/expo"
