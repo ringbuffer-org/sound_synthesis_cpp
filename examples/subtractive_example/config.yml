@@ -1,9 +1,9 @@
 port: 6666
 
-ctl1: 14
-ctl2: 15
-ctl3: 16
-ctl4: 17
+ctl1: 73
+ctl2: 75
+ctl3: 31
+ctl4: 72
 
 path1: "/attack"
 path2: "/release" 

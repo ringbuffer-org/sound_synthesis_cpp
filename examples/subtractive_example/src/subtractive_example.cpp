@@ -8,6 +8,7 @@
 *
 */
 
+
 #include"subtractive_example.h"
 
 
@@ -156,7 +157,6 @@ int SubtractiveExample::process(jack_nframes_t nframes)
                 gain_env->set_attack(tmpAtt);
                 cutoff_env->set_attack(tmpAtt);
             }
-
 
             if(i.ctlNumber == yaml_manager->return_ctl2())
             {
