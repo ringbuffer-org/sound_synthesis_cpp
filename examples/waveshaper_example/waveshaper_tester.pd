@@ -1,0 +1,15 @@
+#N canvas 188 506 450 300 10;
+#X obj 125 130 osc~ 100;
+#X obj 125 153 dac~;
+#X floatatom 125 67 5 0 0 0 - - -, f 5;
+#X obj 242 133 packOSC;
+#X obj 242 156 udpsend;
+#X msg 302 138 connect localhost 6666;
+#X floatatom 242 49 5 0 0 0 - - -, f 5;
+#X msg 242 71 /gain \$1;
+#X connect 0 0 1 0;
+#X connect 2 0 0 0;
+#X connect 3 0 4 0;
+#X connect 5 0 4 0;
+#X connect 6 0 7 0;
+#X connect 7 0 3 0;

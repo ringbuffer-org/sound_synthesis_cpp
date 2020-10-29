@@ -1,0 +1,3 @@
+port: 6666
+path: "/gain" 
+dummy: "lsrg"
