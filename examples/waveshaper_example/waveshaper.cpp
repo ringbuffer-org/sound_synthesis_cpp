@@ -23,7 +23,7 @@ Waveshaper::Waveshaper(YamlMan *yaml_manager){
     // creating an OSC manager instance
     oscman = new OscMan(yaml_manager);
 
-    trans_fun = new TangentShaper();
+    trans_fun = new SineFolder();
 
     cout << "Starting Jack Client!" << endl;
 
