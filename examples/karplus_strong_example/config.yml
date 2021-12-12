@@ -1,0 +1,11 @@
+port: 6666
+
+ctl1: 71
+ctl2: 75
+ctl3: 31
+ctl4: 72
+
+path1: "/trigger"
+path2: "/gain"
+path3: " "
+path4: " "
