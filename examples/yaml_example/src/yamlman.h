@@ -31,14 +31,11 @@ class YamlMan
 
 private:
 
+    std::string param1;
 
-    /// \brief port
-    /// The OSC port to be used for receiving messages
-    int port;
+    int param2;
 
-    /// \brief path
-    /// The OSC path used for the parameter
-    std::string path;
+    double param3;
 
 public:
 
@@ -47,16 +44,11 @@ public:
     /// \param filepath The path of the config file (*.yml)
     YamlMan(std::string filepath);
 
-    /// \brief return_port
-    /// \return The OSC port to be used
-    int return_port();
+    string return_param1();
 
-    /// \brief return_path
-    ///         Returns the OSC path used
-    ///         to change the gain of the signal.
-    ///
-    /// \return The OSC path.
-    string return_path();
+    int return_param2();
+
+    double return_param3();
 
 };
 

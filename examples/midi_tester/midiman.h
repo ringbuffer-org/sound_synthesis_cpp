@@ -107,4 +107,3 @@ private:
 
 
 #endif // MIDIMAN_H
-

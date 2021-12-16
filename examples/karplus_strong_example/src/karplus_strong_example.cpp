@@ -91,7 +91,6 @@ int KarplusStrongExample::process(jack_nframes_t nframes)
 
         if(t==true)
         {
-          cout << "Filling buffer!";
           buffer_pos = 0;
           for(int i=0; i<=l_buff; i++)
             noise_buffer[i]=  rand() % 2 - 1;
@@ -133,10 +132,18 @@ int KarplusStrongExample::process(jack_nframes_t nframes)
           out[chanCNT][sampCNT]=noise_buffer[buffer_pos];
         }
 
-        if(buffer_pos>=1)
-          noise_buffer[buffer_pos-1] = 0.9 * (noise_buffer[buffer_pos]+noise_buffer[buffer_pos-1]);
-        else
-        noise_buffer[l_buff] = 0.9 * (noise_buffer[0]+noise_buffer[l_buff]);
+        // smoothing the buffer
+        double sum = 0;
+        for(int smoothCNT=0; smoothCNT<l_smooth; smoothCNT++)
+          {
+            if(buffer_pos-smoothCNT>=0)
+              sum+=noise_buffer[buffer_pos-smoothCNT];
+            else
+              sum+=noise_buffer[l_buff-smoothCNT];
+          }
+          noise_buffer[buffer_pos] = sum/l_smooth;
+
+
 
         // increment buffer position
          buffer_pos++;

@@ -1,6 +1,6 @@
 /**
 * \file gain_example.h
-* \class GainExample
+* \class ThroughExample
 *
 * \brief Simple example, passing the input to the output
 *        with gain modification through OSC.
@@ -17,20 +17,14 @@
 
 #include<jack/jack.h>
 
-#include"oscman.h"
-
-
 using std::cout;
 using std::endl;
 
-
-
-class GainExample{
+class ThroughExample{
 
 private:
 
 
-    ///
     /// \brief nChannels
     ///         the number of audio channels @todo (should not be hard-coded)
     int nChannels = 2;
@@ -63,9 +57,6 @@ private:
     jack_default_audio_sample_t **in, **out;
 
 
-    ///  The OSC manager object
-    OscMan *oscman;
-
     ///
     /// \brief process
     /// \param nframes
@@ -86,10 +77,10 @@ private:
 public:
 
     ///
-    /// \brief GainExample
+    /// \brief ThroughExample
     ///         the constructor
     /// \param yaml_manager
     ///
-    GainExample(int port);
+    ThroughExample();
 
 };

@@ -13,18 +13,12 @@
 #ifndef OSCMAN_H
 #define OSCMAN_H
 
-
-// works with 'self built'
-
 #include <lo/lo.h>
 #include <lo/lo_cpp.h>
 
-#include "yamlman.h"
-
-#include<iostream>
 #include<vector>
 #include<string>
-
+#include<iostream>
 
 class OscMan
 {
@@ -32,9 +26,8 @@ class OscMan
 private:
 
 
-
     /// the IP port to be opened
-    int port;
+    int port = 6666;
 
     ///
     lo::ServerThread *st;
@@ -63,7 +56,7 @@ public:
     ///         The constructor
     /// \param yaml_manager
     ///
-    OscMan(YamlMan *yaml_manager);
+    OscMan(int port);
 
     ///
     /// \brief OscMan::get_gain

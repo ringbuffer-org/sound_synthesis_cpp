@@ -1,6 +1,6 @@
 /**
 * \file gain_example.cpp
-* \class GainExample
+* \class ThroughExample
 *
 * \brief Simple example, passing the input to the output
 *        with gain modification through OSC.
@@ -11,21 +11,18 @@
 *
 */
 
-#include"gain_example.h"
+#include"through_example.h"
 
 
 using std::cout;
 using std::endl;
 
 
-GainExample::GainExample(int port){
-
-    // creating an OSC manager instance
-    oscman = new OscMan(port);
+ThroughExample::ThroughExample(){
 
     cout << "Starting Jack Client!" << endl;
 
-    this->client = jack_client_open("Gain_Example", JackNullOption, &status, NULL);
+    this->client = jack_client_open("Through_Example", JackNullOption, &status, NULL);
 
     // connect the callback function
     jack_set_process_callback(this->client, this->callback_process, this);
@@ -66,16 +63,14 @@ GainExample::GainExample(int port){
     // run forever
     sleep (-1);
 
-
 }
 
 
 
-int GainExample::process(jack_nframes_t nframes)
+int ThroughExample::process(jack_nframes_t nframes)
 {
 
-    // get the recent gain value from the OSC manager
-    double gain = oscman->get_gain();
+
 
     // get input buffers
     for ( int i=0 ; i<nChannels; i++)
@@ -91,7 +86,7 @@ int GainExample::process(jack_nframes_t nframes)
     {
         for(int sampCNT=0; sampCNT<nframes; sampCNT++)
         {
-            out[chanCNT][sampCNT] = in[chanCNT][sampCNT] * gain;
+            out[chanCNT][sampCNT] = in[chanCNT][sampCNT];
         }
     }
 
@@ -99,7 +94,7 @@ int GainExample::process(jack_nframes_t nframes)
 }
 
 
-int GainExample::callback_process(jack_nframes_t x, void* object)
+int ThroughExample::callback_process(jack_nframes_t x, void* object)
 {
-    return static_cast<GainExample*>(object)->process(x);
+    return static_cast<ThroughExample*>(object)->process(x);
 }

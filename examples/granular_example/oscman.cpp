@@ -57,5 +57,3 @@ double OscMan::get_speed()
 {
     return speed;
 }
-
-

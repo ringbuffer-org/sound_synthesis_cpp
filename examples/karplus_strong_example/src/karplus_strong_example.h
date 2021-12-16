@@ -98,13 +98,17 @@ private:
     ///
     static int callback_process(jack_nframes_t x, void* object);
 
+    // the buffer length
     int l_buff = 600;
 
+    // the 'playback position' in the buffer
     int buffer_pos=0;
+
     /// noise buffer
     double  *noise_buffer;
 
-
+    /// length of moving average filter
+    int l_smooth = 5;
 
 public:
 

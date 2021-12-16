@@ -9,10 +9,8 @@
 *
 */
 
-#include"yamlman.h"
 #include"gain_example.h"
-
-
+#include<string.h>
 #include<iostream>
 #include<stdlib.h>
 #include<unistd.h>
@@ -20,30 +18,30 @@
 using std::cout;
 using std::endl;
 
+
 int main(int argc, char *argv[]){
 
+  int port;
+
     if (argc < 3)
-        cout << "Need config file to start!" << endl;
+        cout << "Need port parameter to start!" << endl;
 
     else{
 
-        // process command line arguments
-        std::string configfile;
+              for (int i = 1; i < argc; i++)
+              {
+                  if (i + 1 != argc)
+                  {
+                      if (strcmp(argv[i], "-p") == 0)
+                      {
+                            // convert string argument to integer
+                            port = atoi(argv[i + 1]);
 
-        for (int i = 1; i < argc; i++)
-        {
-            if (i + 1 != argc)
-            {
-                if (strcmp(argv[i], "-c") == 0)
-                {
-                    configfile = argv[i + 1];
-                    i++;
+                          i++;
+                      }
+                  }
                 }
-            }
-        }
 
-        // initialize objects
-        YamlMan *yaml_manager = new YamlMan(configfile);
-        GainExample *t = new GainExample(yaml_manager);
+        GainExample *t = new GainExample(port);
     }
 }

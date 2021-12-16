@@ -19,25 +19,25 @@ YamlMan::YamlMan(std::string filepath)
 
     YAML::Node config = YAML::LoadFile(filepath);
 
-    // read values
-    port = config["port"].as<int>();
-    path = config["path"].as<std::string>();
+    // access YAML nodes:
+    param1 = config["param1"].as<std::string>();
+    param2 = config["param2"].as<int>();
+    param3 = config["param3"].as<double>();
 
 }
 
 
-int YamlMan::return_port()
+std::string YamlMan::return_param1()
 {
-
-    return port;
-
+    return param1;
 }
 
-std::string YamlMan::return_path()
+int YamlMan::return_param2()
 {
-
-    return path;
-
+    return param2;
 }
 
-
+double YamlMan::return_param3()
+{
+    return param3;
+}
