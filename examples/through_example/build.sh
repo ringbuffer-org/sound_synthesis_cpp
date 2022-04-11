@@ -1,3 +1,3 @@
 #!/bin/sh
 
-g++ -std=c++11 gain_example.cpp oscman.cpp -ljack -llo -o gain_example
+g++ -std=c++11 src/main.cpp src/through_example.cpp -ljack -o through_example
