@@ -108,7 +108,10 @@ private:
     double  *noise_buffer;
 
     /// length of moving average filter
-    int l_smooth = 5;
+    int l_smooth = 10;
+
+    // feedback gain
+    double gain =1.0;
 
 public:
 

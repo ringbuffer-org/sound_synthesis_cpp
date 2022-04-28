@@ -30,9 +30,13 @@ Besides the general framework of all examples in this teaching unit, the ``karpl
     double  *noise_buffer;
 
     /// length of moving average filter
-    int l_smooth = 5;
+    int l_smooth = 10;
 
-Note that the pitch of the resulting sound is hard-coded in this example, since it is based only on the sampling rate of the system and the buffer length. In contrast to the original Karplus-Strong algorithm, this version uses an arbitrary length for the  moving average filter, instead of only two samples.
+    // feedback gain
+    double gain =1.0;
+
+
+Note that the pitch of the resulting sound is hard-coded in this example, since it is based only on the sampling rate of the system and the buffer length. In contrast to the original Karplus-Strong algorithm, this version uses an arbitrary length for the  moving average filter, instead of only two samples. This results in a faster decay of high frequency components.
 
 -----
 
@@ -106,16 +110,16 @@ This is done as follows:
 
 .. code-block:: cpp
 
-    // smoothing the buffer
-    double sum = 0;
-    for(int smoothCNT=0; smoothCNT<l_smooth; smoothCNT++)
-      {
-        if(buffer_pos-smoothCNT>=0)
-          sum+=noise_buffer[buffer_pos-smoothCNT];
-        else
-          sum+=noise_buffer[l_buff-smoothCNT];
-      }
-      noise_buffer[buffer_pos] = sum/l_smooth;
+  // smoothing the buffer
+  double sum = 0;
+  for(int smoothCNT=0; smoothCNT<l_smooth; smoothCNT++)
+    {
+      if(buffer_pos+smoothCNT<l_buff)
+        sum+=noise_buffer[buffer_pos+smoothCNT];
+      else
+        sum+=noise_buffer[smoothCNT];
+    }
+    noise_buffer[buffer_pos] = gain*(sum/l_smooth);
 
 
 ------
@@ -129,7 +133,21 @@ To compile the KarplusStrongExample, run the following command line:
 
   g++ -Wall -L/usr/lib src/yamlman.cpp src/main.cpp src/karplus_strong_example.cpp src/oscman.cpp src/midiman.cpp -ljack -llo -lyaml-cpp -lsndfile -lrtmidi -o karplus_strong
 
-This call of the g++ compiler includes all necessary libraries.
+This call of the g++ compiler includes all necessary libraries and creates the binary ``karplus_strong``.
+
+------
+
+Running the Example
+===================
+
+The binary can be started with the following command line:
+
+.. code-block:: console
+
+  ./karplus_strong -c config.yml -m "OSC"
+
+This will use the configurations from the YAML file and wait for OSC input. The easiest way of triggering the synth via OSC is to use the Puredata patch from the example's directory.
+
 
 ------
 

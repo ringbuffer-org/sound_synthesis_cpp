@@ -84,7 +84,7 @@ int KarplusStrongExample::process(jack_nframes_t nframes)
     if(mode.compare("OSC") == 0)
     {
 
-        double GAIN = oscman->get_gain();
+        gain = oscman->get_gain();
 
 
         bool t          = oscman->is_triggered();
@@ -136,12 +136,12 @@ int KarplusStrongExample::process(jack_nframes_t nframes)
         double sum = 0;
         for(int smoothCNT=0; smoothCNT<l_smooth; smoothCNT++)
           {
-            if(buffer_pos-smoothCNT>=0)
-              sum+=noise_buffer[buffer_pos-smoothCNT];
+            if(buffer_pos+smoothCNT<l_buff)
+              sum+=noise_buffer[buffer_pos+smoothCNT];
             else
-              sum+=noise_buffer[l_buff-smoothCNT];
+              sum+=noise_buffer[smoothCNT];
           }
-          noise_buffer[buffer_pos] = sum/l_smooth;
+          noise_buffer[buffer_pos] = gain*(sum/l_smooth);
 
 
 
