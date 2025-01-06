@@ -22,7 +22,7 @@ The first example, just passing through the audio, is compiled with the followin
   g++ -Wall src/gain_example.cpp src/oscman.cpp -ljack -o gain_example
 
 The compiler gets the extra argument ``Wall`` to print all warnings.
-All source (``cpp``) files are passed to the compiler, followed by all libraries which need to be linked (linker arguments). The name of the binary or executable is specified after the ``-o`` flag. 
+All source (``cpp``) files are passed to the compiler, followed by all libraries which need to be linked (linker arguments). The name of the binary or executable is specified after the ``-o`` flag.
 
 ------
 
